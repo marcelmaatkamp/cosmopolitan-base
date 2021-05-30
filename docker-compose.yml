@@ -1,0 +1,9 @@
+version: '2'
+services:
+
+ cosmopolitan-base:
+  image: marcelmaatkamp/cosmopolitan-base
+  build:
+   context: .
+   args:
+    COSMOPOLITAN: x

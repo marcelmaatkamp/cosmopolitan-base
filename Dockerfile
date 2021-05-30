@@ -1,11 +1,11 @@
-ARG COSMOPOLITAN=/cosmopolitan
-FROM marcelmaatkamp/cosmopolitan
-RUN \
- git clone https://github.com/Yardanico/cosmonim ${COSMONIM} &&\ 
- cd ${COSMONIM} &&\
- cp \
-  ${COSMOPOLITAN}/o/cosmopolitan.h \
-  ${COSMOPOLITAN}/o/libc/crt/crt.o \
-  ${COSMOPOLITAN}/o/ape/ape.o \
-  ${COSMOPOLITAN}/o/ape/ape.lds \
-  ${COSMOPOLITAN}/o/cosmopolitan.a
+FROM marcelmaatkamp/cosmopolitan as cosmopolitan
+
+FROM scratch
+COPY \
+ --from=cosmopolitan\
+  /cosmopolitan/o/cosmopolitan.h \
+  /cosmopolitan/o/libc/crt/crt.o \
+  /cosmopolitan/o/ape/ape.o \
+  /cosmopolitan/o/ape/ape.lds \
+  /cosmopolitan/o/cosmopolitan.a \
+ /cosmopolitan
